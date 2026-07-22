@@ -576,5 +576,11 @@ export const pageTypes = [
   aboutPageType,
 ];
 
-/** Document types that must only ever have one instance. */
-export const SINGLETON_TYPES = new Set(pageTypes.map((t) => t.name));
+/**
+ * Document types that must only ever have one instance.
+ *
+ * Explicitly `Set<string>`: it is queried with arbitrary schema-type names
+ * from Sanity's document callbacks, which a Set inferred over the literal
+ * union would reject.
+ */
+export const SINGLETON_TYPES: Set<string> = new Set(pageTypes.map((t) => t.name));

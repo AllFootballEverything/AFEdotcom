@@ -3,7 +3,7 @@
 All Football Everything — web app.
 
 Next.js (App Router) on Vercel, Sanity for content, Whop for memberships,
-Stripe for the shop. Ported from the "AFE Website v2 (1b)" Claude Design
+Stripe for the shop. Ported from the "AFE Website v2 (1b)" 
 project.
 
 ## Stack
