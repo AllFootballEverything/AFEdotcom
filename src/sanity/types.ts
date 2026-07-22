@@ -120,7 +120,6 @@ export type HomePage = {
   clubhouseHeadline?: string;
   clubhouseBody?: string;
   clubhouseCtas?: Cta[];
-  mapImage?: Image;
   mapHeadline?: string;
   mapTopCountries?: string;
   mapLegend?: Stat[];

@@ -110,6 +110,37 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Regions map. Hover dimming is done in CSS rather than React so that hovering
+   a country does not re-render 176 path elements.
+--------------------------------------------------------------------------- */
+.afe-map path {
+  transition: opacity 0.25s ease;
+}
+
+.afe-map path[data-region] {
+  cursor: pointer;
+}
+
+.afe-map svg.afe-map-hovering path:not(.afe-map-hovered) {
+  opacity: 0.22;
+}
+
+.afe-map-lift {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(1);
+  transition: transform 0.25s ease;
+  stroke: #efede8;
+  stroke-width: 1.2;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.6));
+  pointer-events: none;
+}
+
+.afe-map-lift-up {
+  transform: scale(1.5);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

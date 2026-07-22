@@ -114,7 +114,7 @@ export function getHomePage() {
       missionCta ${CTA},
       clubhouseKicker, clubhouseHeadline, clubhouseBody,
       clubhouseCtas[] ${CTA},
-      mapImage, mapHeadline, mapTopCountries, mapLegend[] ${STAT},
+      mapHeadline, mapTopCountries, mapLegend[] ${STAT},
       eventsHeading, eventsCta ${CTA},
       partnersHeading, partnersKicker
     }`,

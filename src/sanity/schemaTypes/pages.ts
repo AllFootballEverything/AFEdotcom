@@ -240,13 +240,6 @@ export const homePageType = defineType({
     }),
 
     defineField({
-      name: "mapImage",
-      title: "World map image",
-      type: "image",
-      group: "map",
-      options: { hotspot: true },
-    }),
-    defineField({
       name: "mapHeadline",
       title: "Map headline",
       type: "string",

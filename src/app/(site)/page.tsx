@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { BoardPostCard } from "@/components/sections/BoardPostCard";
 import { SessionCard } from "@/components/sections/SessionCard";
+import { WorldMap } from "@/components/sections/WorldMap";
 import { Ticker } from "@/components/site/Ticker";
 import { ButtonLink } from "@/components/ui/Button";
 import { Headline, MarkerHeadline } from "@/components/ui/Headline";
@@ -55,7 +56,6 @@ export default async function HomePage() {
 
   const heroMedia = imageSrc(page?.heroMedia, 1400) ?? "/assets/afe-shooting.gif";
   const heroStats = page?.heroStats?.length ? page.heroStats : DEFAULTS.heroStats;
-  const mapImage = imageSrc(page?.mapImage, 1800) ?? "/assets/afe-world-map-v2.png";
 
   return (
     <div className="animate-[afe-fadeup_0.45s_ease_both]">
@@ -257,46 +257,40 @@ export default async function HomePage() {
           </span>
         </div>
 
-        <div className="relative col-span-full overflow-hidden border border-white/[0.14] bg-ink-deep">
-          <Image
-            src={mapImage}
-            alt="AFE core and extended regions world map"
-            width={1800}
-            height={950}
-            sizes="100vw"
-            className="block h-auto w-full"
-          />
-          <div className="flex flex-col gap-3 p-6 lg:absolute lg:bottom-5 lg:left-6 lg:p-0">
-            <div className="flex flex-wrap items-baseline gap-4">
+        <div className="col-span-full">
+          <WorldMap
+            topCountries={
+              page?.mapTopCountries ?? "TOP: UK · ITALY · FRANCE · SPAIN · GERMANY"
+            }
+            headline={
               <Headline
                 as="h2"
                 text={page?.mapHeadline ?? DEFAULTS.mapHeadline}
                 className="font-display text-[22px] uppercase"
               />
-              <span className="font-mono text-[11px] font-medium text-white/50">
-                {page?.mapTopCountries ?? "TOP: UK · ITALY · FRANCE · SPAIN · GERMANY"}
-              </span>
-            </div>
-            <div className="flex flex-wrap gap-5">
-              {(
-                page?.mapLegend ?? [
-                  { value: "volt", label: "AFE CORE REGIONS" },
-                  { value: "rust", label: "AFE EXTENDED REGIONS" },
-                ]
-              ).map((entry) => (
-                <span key={entry.label} className="flex items-center gap-2">
-                  <span
-                    className={`inline-block h-3 w-3 ${
-                      entry.value === "rust" ? "bg-rust" : "bg-volt"
-                    }`}
-                  />
-                  <span className="font-mono text-[10px] font-medium tracking-[0.08em] text-cream/75">
-                    {entry.label}
+            }
+            legend={
+              <div className="flex flex-wrap gap-5">
+                {(
+                  page?.mapLegend ?? [
+                    { value: "volt", label: "AFE CORE REGIONS" },
+                    { value: "rust", label: "AFE EXTENDED REGIONS" },
+                  ]
+                ).map((entry) => (
+                  <span key={entry.label} className="flex items-center gap-2">
+                    <span
+                      className={`inline-block h-3 w-3 ${
+                        entry.value === "rust" ? "bg-rust" : "bg-volt"
+                      }`}
+                    />
+                    <span className="font-mono text-[10px] font-medium tracking-[0.08em] text-cream/75">
+                      {entry.label}
+                    </span>
                   </span>
-                </span>
-              ))}
-            </div>
-          </div>
+                ))}
+              </div>
+            }
+          />
         </div>
       </section>
 

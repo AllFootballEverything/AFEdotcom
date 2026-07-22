@@ -21,3 +21,6 @@ yarn-error.log*
 next-env.d.ts
 
 .sanity
+
+# Machine-specific: pins an absolute node path for this sandbox.
+.claude/launch.json

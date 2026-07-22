@@ -7,12 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build:map": "node --experimental-strip-types scripts/build-world-map.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^3.2.1",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.68.3",
+    "d3-geo": "^3.1.1",
     "jose": "^5.9.6",
     "next": "^15.1.6",
     "next-sanity": "^9.8.54",
@@ -21,13 +23,17 @@
     "resend": "^4.1.2",
     "sanity": "^3.68.3",
     "stripe": "^17.5.0",
-    "styled-components": "^6.1.14"
+    "styled-components": "^6.1.14",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
+    "@types/d3-geo": "^3.1.0",
     "@types/node": "^22.10.7",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
+    "@types/topojson-client": "^3.1.5",
     "eslint": "^9.18.0",
     "eslint-config-next": "^15.1.6",
     "tailwindcss": "^4.0.0",
