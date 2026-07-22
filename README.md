@@ -29,9 +29,15 @@ npm run dev
 The site runs at `http://localhost:3000`, the studio at
 `http://localhost:3000/studio`.
 
-> **Note:** `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET`
-> must be set before the app will build at all — they are read at module load.
-> Everything else fails softly, affecting only the feature that needs it.
+> **Note:** every integration fails softly. The app builds and deploys with no
+> environment variables at all — pages render the design defaults baked into
+> the components, `/studio` explains that it is unconfigured, and each failed
+> read is logged. Nothing 500s because a key is missing.
+>
+> That is a convenience for the first deploy, not a finished state: without
+> `NEXT_PUBLIC_SANITY_PROJECT_ID` the site shows placeholder copy and no
+> content. `NEXT_PUBLIC_SANITY_DATASET` is optional and defaults to
+> `production`.
 
 ## Setup checklist
 

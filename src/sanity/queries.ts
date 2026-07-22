@@ -3,7 +3,7 @@ import "server-only";
 import type { PortableTextBlock } from "@portabletext/react";
 import { groq } from "next-sanity";
 
-import { sanityClient } from "./client";
+import { getSanityClient } from "./client";
 import type {
   AboutPage,
   BoardPost,
@@ -37,7 +37,7 @@ async function query<T>(
   params: Record<string, unknown>,
   { tags }: FetchOptions,
 ): Promise<T> {
-  return sanityClient.fetch<T>(q, params, {
+  return getSanityClient().fetch<T>(q, params, {
     next: { tags, revalidate: 3600 },
   });
 }
