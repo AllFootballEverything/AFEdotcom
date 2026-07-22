@@ -30,7 +30,7 @@ export function Nav({ navCta, viewerName, isSignedIn = false }: Props) {
           <Image
             src="/assets/afe-logo-white.png"
             alt="AFE"
-            width={120}
+            width={123}
             height={34}
             priority
             className="h-[34px] w-auto"
