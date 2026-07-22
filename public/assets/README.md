@@ -12,10 +12,20 @@ public tree.
 | `afe-logo-white.png`  | `IMG_0090.PNG` — white wordmark   | Nav logo (on ink)           |
 | `afe-logo-gray.png`   | `IMG_0088.PNG` — dark wordmark    | Light/bone backgrounds      |
 | `afe-logo-orange.png` | `IMG_0099.PNG` — rust monogram    | Board avatars, favicon      |
+| `afe-shooting.gif`    | `afe-shooting-master.gif`         | Homepage hero               |
 
-Derivation: trimmed of transparent margin, capped at 1200px wide (wordmarks) or
+Logos: trimmed of transparent margin, capped at 1200px wide (wordmarks) or
 centred on a 512×512 transparent canvas (monogram — the site renders it in a
 square box at 26–36px, and the 1.6:1 source would otherwise be squashed).
+
+Hero GIF: the master is 1002×452 and **10.1 MB**, which is far too heavy for
+something loaded eagerly at the top of the homepage. The served copy is
+re-encoded to 800px wide with a 64-colour palette — 2.48 MB, all 32 frames
+intact.
+
+That is still large. The real fix is a muted looping `<video>` (H.264 + WebM),
+which would land around 300–500 KB and decode in hardware instead of on the
+main thread. It needs `ffmpeg` and a small change to the hero markup.
 
 ## Still needed
 
