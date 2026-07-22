@@ -38,7 +38,11 @@ export function SessionCard({
       <span className="font-display text-[22px] leading-none text-volt">
         {formatEventDate(session.startsAt)}
       </span>
-      <span className="font-sans text-base font-bold uppercase">{session.title}</span>
+      {/* Explicit text-cream: the card is an <a>, and the global a{color:volt}
+          rule would otherwise tint this title volt instead of white. */}
+      <span className="font-sans text-base font-bold uppercase text-cream">
+        {session.title}
+      </span>
       <span className="font-mono text-xs font-medium text-white/50">
         {session.location}
       </span>
