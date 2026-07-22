@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   AFE design tokens — lifted from the Claude Design source
+   (afe-1b-page-*-src.dc.html). Do not invent new brand colours; use these.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-ink: #1e1e1e; /* primary dark surface / body background */
+  --color-ink-panel: #232323; /* raised card on dark */
+  --color-ink-deep: #161616; /* recessed band (ticker, map frame) */
+  --color-cream: #efede8; /* body text on dark */
+  --color-bone: #f0eee9; /* light editorial band background */
+  --color-volt: #cae74d; /* primary accent / CTA */
+  --color-rust: #c35934; /* secondary accent / hover */
+
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
+  --font-display: var(--font-archivo-black), var(--font-archivo), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  --animate-fadeup: afe-fadeup 0.45s ease both;
+  --animate-ticker: afe-ticker 30s linear infinite;
+}
+
+@keyframes afe-fadeup {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes afe-ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-ink);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--color-volt);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--color-rust);
+  }
+
+  ::selection {
+    background: var(--color-volt);
+    color: #1a1a1a;
+  }
+
+  /* The design is built on hard edges — never let a UA round anything. */
+  button,
+  input,
+  select,
+  textarea {
+    border-radius: 0;
+    font: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-volt);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* Kicker: the small uppercase rust label that opens most sections. */
+  .afe-kicker {
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-rust);
+  }
+
+  /* Meta: monospaced supporting text (dates, view counts, legal). */
+  .afe-meta {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  /* Label: the bold uppercase text used inside buttons and nav items. */
+  .afe-label {
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
