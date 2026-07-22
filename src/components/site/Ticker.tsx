@@ -13,22 +13,33 @@ type Props = {
  *
  * The item list is rendered twice inside a `w-max` flex row and translated by
  * -50%, which is what makes the scroll seamless — the second copy is exactly
- * where the first started. Marked aria-hidden on the duplicate so screen
- * readers hear the headlines once.
+ * where the first started.
+ *
+ * The two copies MUST be structurally identical. An earlier version wrapped
+ * only the duplicate in an extra `<span aria-hidden>`, which made the two flex
+ * items align differently and left the second copy sitting 15px higher than
+ * the first — the text visibly jumped as the strip scrolled. Both copies are
+ * now the same element with the same classes; the duplicate just carries
+ * aria-hidden so the headlines are announced once.
  */
-export function Ticker({ label = "THE CLUBHOUSE — LIVE", items, cta }: Props) {
-  if (!items || items.length === 0) return null;
-
-  const strip = (
-    <span className="whitespace-nowrap py-4.5 font-mono text-[13px] font-medium text-cream/85">
+function Strip({ items, hidden }: { items: string[]; hidden?: boolean }) {
+  return (
+    <span
+      aria-hidden={hidden || undefined}
+      className="flex shrink-0 items-center whitespace-nowrap py-4.5 font-mono text-[13px] font-medium text-cream/85"
+    >
       {items.map((item, index) => (
-        <span key={index}>
+        <span key={index} className="flex items-center">
           {item}
           <span className="px-3 text-volt">✦</span>
         </span>
       ))}
     </span>
   );
+}
+
+export function Ticker({ label = "THE CLUBHOUSE — LIVE", items, cta }: Props) {
+  if (!items || items.length === 0) return null;
 
   return (
     <div className="flex items-stretch border-y-2 border-volt bg-ink-deep">
@@ -38,9 +49,9 @@ export function Ticker({ label = "THE CLUBHOUSE — LIVE", items, cta }: Props) 
       </div>
 
       <div className="flex min-w-0 flex-1 items-center overflow-hidden">
-        <div className="flex w-max animate-[afe-ticker_30s_linear_infinite]">
-          {strip}
-          <span aria-hidden="true">{strip}</span>
+        <div className="flex w-max items-center animate-[afe-ticker_30s_linear_infinite]">
+          <Strip items={items} />
+          <Strip items={items} hidden />
         </div>
       </div>
 
