@@ -64,7 +64,9 @@ export function ExclusiveCard({
       </div>
 
       <div className="flex flex-1 flex-col gap-2 p-5">
-        <h3 className="font-sans text-base font-bold uppercase leading-tight">
+        {/* text-cream is explicit: an unlocked card is an <a>, and the global
+            a{color:volt} rule would otherwise tint the title volt. */}
+        <h3 className="font-sans text-base font-bold uppercase leading-tight text-cream">
           {item.title}
         </h3>
         {item.meta ? (
