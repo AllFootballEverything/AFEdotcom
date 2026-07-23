@@ -75,6 +75,12 @@ export default async function ExclusiveDetailPage({ params }: Params) {
                 className="h-full w-full"
               />
             </div>
+          ) : item.media === "video" && item.videoUrl ? (
+            // Not an embeddable single video (channel, playlist, unknown host) —
+            // never frame it; link out instead.
+            <div className="mb-10">
+              <ButtonLink href={item.videoUrl}>Watch on YouTube →</ButtonLink>
+            </div>
           ) : null}
 
           {/* Article/series that lives off-site: send the reader onward. */}
