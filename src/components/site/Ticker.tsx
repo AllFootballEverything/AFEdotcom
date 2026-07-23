@@ -31,7 +31,8 @@ function Strip({ items, hidden }: { items: string[]; hidden?: boolean }) {
       {items.map((item, index) => (
         <span key={index} className="flex items-center">
           {item}
-          <span className="px-3 text-volt">✦</span>
+          {/* 16px each side of the separator — refined spacing per handoff. */}
+          <span className="px-4 text-volt">✦</span>
         </span>
       ))}
     </span>

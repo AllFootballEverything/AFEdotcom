@@ -16,6 +16,10 @@ export type Seo = { title?: string; description?: string; image?: Image };
 
 export type SiteSettings = {
   navCta?: Cta;
+  /** Header button visibility. Undefined means "shown" — omission never hides. */
+  showBookNowButton?: boolean;
+  showLoginButton?: boolean;
+  showCartButton?: boolean;
   tickerEnabled?: boolean;
   tickerLabel?: string;
   tickerItems?: string[];

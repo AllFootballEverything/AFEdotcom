@@ -58,6 +58,31 @@ export const siteSettingsType = defineType({
       description: 'The volt button top-right. Design default: "BOOK NOW" → /training',
     }),
     defineField({
+      name: "showBookNowButton",
+      title: "Show BOOK NOW button",
+      type: "boolean",
+      group: "nav",
+      description: "The volt CTA in the header. On by default.",
+      initialValue: true,
+    }),
+    defineField({
+      name: "showLoginButton",
+      title: "Show LOG IN button",
+      type: "boolean",
+      group: "nav",
+      description:
+        "The outlined LOG IN button (and the signed-in account chip in its place). On by default.",
+      initialValue: true,
+    }),
+    defineField({
+      name: "showCartButton",
+      title: "Show cart button",
+      type: "boolean",
+      group: "nav",
+      description: "The cart icon in the header. On by default.",
+      initialValue: true,
+    }),
+    defineField({
       name: "tickerEnabled",
       title: "Show the Clubhouse ticker",
       type: "boolean",
