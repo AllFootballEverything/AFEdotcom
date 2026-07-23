@@ -47,10 +47,14 @@ const projection = geoNaturalEarth1().fitSize([WIDTH, HEIGHT], {
 const toPath = geoPath(projection);
 
 const shapes = [];
-for (const f of countries) {
-  const id = String(f.id).padStart(3, "0");
+countries.forEach((f, index) => {
+  // A handful of features (disputed/unrecognised territories) carry no id.
+  // They are always grey and inert, but each still needs a UNIQUE id so it can
+  // be a stable React key — otherwise several "undefined" ids collide and React
+  // drops all but one of those landmasses. Fall back to the feature index.
+  const id = f.id != null ? String(f.id).padStart(3, "0") : `x${index}`;
   const d = toPath(f);
-  if (!d) continue; // degenerate geometry — nothing to draw
+  if (!d) return; // degenerate geometry — nothing to draw
 
   const region = regionFor(id);
   shapes.push({
@@ -59,7 +63,7 @@ for (const f of countries) {
     // Names are only needed for the countries that show a tooltip.
     ...(region && { region, name: f.properties?.name ?? id }),
   });
-}
+});
 
 const withRegion = shapes.filter((s) => s.region).length;
 const output = { width: WIDTH, height: HEIGHT, shapes };

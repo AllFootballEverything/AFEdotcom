@@ -15,6 +15,30 @@ type Props = {
   isSignedIn?: boolean;
 };
 
+/** Header cart glyph — 18×18 stroked outline, matches the design handoff. */
+function CartIcon() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="square"
+      aria-hidden="true"
+    >
+      <path d="M3 4h2.5l2.2 11.5h10.6L21 8H6.1" />
+      <circle cx="9.5" cy="20" r="1.4" fill="currentColor" stroke="none" />
+      <circle cx="17.5" cy="20" r="1.4" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+// Shared with the account chip so LOG IN and the signed-in name look identical.
+const OUTLINE_BUTTON =
+  "border border-white/35 px-[18px] py-[11px] font-sans text-xs font-bold uppercase tracking-[0.08em] text-cream transition-colors hover:border-volt hover:text-volt";
+
 export function Nav({ navCta, viewerName, isSignedIn = false }: Props) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -22,6 +46,13 @@ export function Nav({ navCta, viewerName, isSignedIn = false }: Props) {
   const cta = navCta ?? { label: "BOOK NOW", href: "/training" };
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  // LOG IN uses the site's own Whop OAuth flow (not the design's external
+  // placeholder URL), returning the viewer to wherever they were. A plain <a>,
+  // not <Link> — it targets an API route, so it must be a full navigation.
+  const loginHref = `/api/auth/whop/login?returnTo=${encodeURIComponent(
+    pathname || "/members",
+  )}`;
 
   return (
     <header className="sticky top-0 z-50 border-b-[3px] border-volt bg-ink/95 backdrop-blur-sm">
@@ -54,13 +85,24 @@ export function Nav({ navCta, viewerName, isSignedIn = false }: Props) {
           ))}
 
           {isSignedIn ? (
-            <Link
-              href="/members"
-              className="ml-3 border border-white/25 px-4 py-2.5 font-sans text-xs font-bold uppercase tracking-[0.08em] text-cream transition-colors hover:border-volt hover:text-volt"
-            >
+            <Link href="/members" className={`ml-4 ${OUTLINE_BUTTON}`}>
               {viewerName ? viewerName.split(" ")[0] : "ACCOUNT"}
             </Link>
-          ) : null}
+          ) : (
+            <a href={loginHref} className={`ml-4 ${OUTLINE_BUTTON}`}>
+              LOG IN
+            </a>
+          )}
+
+          {/* Cart — stretches to match the button heights either side of it. */}
+          <Link
+            href="/shop"
+            aria-label="Cart"
+            title="Cart"
+            className="flex w-[42px] self-stretch items-center justify-center border border-white/35 text-cream transition-colors hover:border-volt hover:text-volt"
+          >
+            <CartIcon />
+          </Link>
 
           <Link
             href={cta.href}
@@ -116,6 +158,23 @@ export function Nav({ navCta, viewerName, isSignedIn = false }: Props) {
               {item.label}
             </Link>
           ))}
+          {isSignedIn ? (
+            <Link
+              href="/members"
+              onClick={() => setOpen(false)}
+              className="border-b border-white/10 px-6 py-4 font-sans text-sm font-bold uppercase tracking-[0.08em] text-cream"
+            >
+              {viewerName ? viewerName.split(" ")[0] : "ACCOUNT"}
+            </Link>
+          ) : (
+            <a
+              href={loginHref}
+              className="border-b border-white/10 px-6 py-4 font-sans text-sm font-bold uppercase tracking-[0.08em] text-cream"
+            >
+              LOG IN
+            </a>
+          )}
+
           <Link
             href={cta.href}
             onClick={() => setOpen(false)}
