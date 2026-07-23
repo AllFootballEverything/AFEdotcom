@@ -43,7 +43,11 @@ export function ExclusiveCard({
             }`}
           />
         ) : (
-          <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,#1E1E1E,#1E1E1E_10px,#232323_10px,#232323_20px)]" />
+          <div className="absolute inset-0 flex items-center justify-center bg-[repeating-linear-gradient(45deg,#1E1E1E,#1E1E1E_10px,#232323_10px,#232323_20px)]">
+            <span className="font-mono text-[11px] font-medium tracking-[0.15em] text-white/40">
+              [ {MEDIA_LABEL[item.media]} ]
+            </span>
+          </div>
         )}
 
         <span className="absolute left-3 top-3 bg-volt px-2 py-1 font-sans text-[10px] font-black tracking-[0.08em] text-[#1a1a1a]">
@@ -92,6 +96,22 @@ export function ExclusiveCard({
 
   if (!unlocked) {
     return <article className={className}>{body}</article>;
+  }
+
+  // Articles/series with an external link jump straight out; videos and
+  // on-site articles open the internal item page (which embeds / renders them).
+  const external = item.media !== "video" && item.externalUrl;
+  if (external) {
+    return (
+      <a
+        href={item.externalUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
+        {body}
+      </a>
+    );
   }
 
   return (

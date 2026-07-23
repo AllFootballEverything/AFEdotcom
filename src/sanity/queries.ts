@@ -72,7 +72,7 @@ const BOARD_POST_FIELDS = groq`
 
 const EXCLUSIVE_FIELDS = groq`
   _id, title, "slug": slug.current, media, category, meta,
-  visibility, thumbnail, videoUrl, publishedAt
+  visibility, thumbnail, videoUrl, externalUrl, publishedAt
 `;
 
 const TIER_FIELDS = groq`

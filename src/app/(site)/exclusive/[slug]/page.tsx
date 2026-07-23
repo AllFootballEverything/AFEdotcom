@@ -7,6 +7,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { getViewer } from "@/lib/auth/viewer";
 import { formatLongDate } from "@/lib/format";
 import { TIER_LABEL, canAccess } from "@/lib/tiers";
+import { toEmbedUrl } from "@/lib/video";
 import { getExclusiveItemBySlug } from "@/sanity/queries";
 import { safeFetch } from "@/sanity/safe";
 
@@ -41,6 +42,7 @@ export default async function ExclusiveDetailPage({ params }: Params) {
   if (!item) notFound();
 
   const unlocked = canAccess(viewer.tier, item.visibility);
+  const embedUrl = item.media === "video" ? toEmbedUrl(item.videoUrl) : undefined;
 
   return (
     <article className="animate-[afe-fadeup_0.45s_ease_both]">
@@ -63,16 +65,23 @@ export default async function ExclusiveDetailPage({ params }: Params) {
 
       {unlocked ? (
         <div className="px-6 py-12 lg:px-12">
-          {item.videoUrl ? (
+          {embedUrl ? (
             <div className="mb-10 aspect-video w-full max-w-[900px] border border-white/[0.18]">
               <iframe
-                src={item.videoUrl}
+                src={embedUrl}
                 title={item.title}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="h-full w-full"
               />
             </div>
+          ) : null}
+
+          {/* Article/series that lives off-site: send the reader onward. */}
+          {item.externalUrl && item.media !== "video" ? (
+            <ButtonLink href={item.externalUrl}>
+              {item.media === "series" ? "Watch the series →" : "Read the full article →"}
+            </ButtonLink>
           ) : null}
 
           {item.body?.length ? (
