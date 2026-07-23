@@ -20,6 +20,9 @@ export default async function SiteLayout({
         navCta={settings?.navCta}
         viewerName={viewer.name ?? viewer.username}
         isSignedIn={viewer.isSignedIn}
+        showBookNow={settings?.showBookNowButton}
+        showLogin={settings?.showLoginButton}
+        showCart={settings?.showCartButton}
       />
       <main>{children}</main>
       <Footer settings={settings} />

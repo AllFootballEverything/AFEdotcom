@@ -88,6 +88,7 @@ export function getSiteSettings() {
   return query<SiteSettings | null>(
     groq`*[_type == "siteSettings"][0]{
       navCta ${CTA},
+      showBookNowButton, showLoginButton, showCartButton,
       tickerEnabled, tickerLabel, tickerItems,
       tickerCta ${CTA},
       footerHeadline, footerMeta,
