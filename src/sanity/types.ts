@@ -69,6 +69,7 @@ export type ExclusiveItem = {
   visibility: Visibility;
   thumbnail?: Image;
   videoUrl?: string;
+  externalUrl?: string;
   publishedAt?: string;
 };
 

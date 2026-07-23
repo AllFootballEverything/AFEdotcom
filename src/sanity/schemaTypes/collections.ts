@@ -249,35 +249,58 @@ export const exclusiveItemType = defineType({
     }),
     defineField({
       name: "category",
-      title: "Category tag",
+      title: "Badge",
       type: "string",
-      description: 'The volt chip, e.g. "DRILLS", "MATCH IQ", "FINISHING".',
+      description:
+        'The volt chip shown on the card, e.g. "DRILLS", "MATCH IQ", "FINISHING", "INSIGHTS", "BEHIND AFE", "PRO TALK".',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "meta",
       title: "Meta line",
       type: "string",
-      description: 'e.g. "12 MIN — MEMBERS" or "EP. 01–04"',
+      description:
+        'Small caption under the title, e.g. "12 MIN", "6 MIN READ", "EP. 01–04". Add " — MEMBERS" for gated items.',
     }),
     visibilityField,
     defineField({
       name: "thumbnail",
       title: "Thumbnail",
       type: "image",
+      description:
+        "Optional. For YouTube videos, leave blank to fall back to the diagonal-stripe placeholder, or upload a still.",
       options: { hotspot: true },
     }),
     defineField({
       name: "videoUrl",
-      title: "Video URL",
+      title: "YouTube video URL",
       type: "url",
-      hidden: ({ parent }) => parent?.media === "article",
+      description:
+        "For Video items. Paste any YouTube link (watch, youtu.be, or shorts) — it is embedded on the item page. Vimeo links work too.",
+      hidden: ({ parent }) => parent?.media !== "video",
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          const media = (context.parent as { media?: string } | undefined)?.media;
+          if (media === "video" && !value) return "A video item needs a YouTube URL.";
+          return true;
+        }),
+    }),
+    defineField({
+      name: "externalUrl",
+      title: "Article / external URL",
+      type: "url",
+      description:
+        "For Article or Series items. The link to the full piece — the card opens it in a new tab. Leave blank to write the article on-site in Body below instead.",
+      hidden: ({ parent }) => parent?.media === "video",
     }),
     defineField({
       name: "body",
       title: "Body",
       type: "array",
       of: [{ type: "block" }],
+      description:
+        "Optional on-site article text. Used when there is no external URL. Ignored for videos.",
+      hidden: ({ parent }) => parent?.media === "video",
     }),
     defineField({
       name: "publishedAt",
