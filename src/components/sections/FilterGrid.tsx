@@ -62,9 +62,20 @@ export function FilterGrid({
         </div>
       ) : null}
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {/*
+        grid-auto-rows:1fr makes every row the same height rather than each row
+        sizing to its own tallest card, so the whole library reads as one even
+        grid. The wrapper is h-full so the card can stretch to fill its cell.
+
+        Deliberately `1fr` (= minmax(auto,1fr)) rather than Tailwind's
+        auto-rows-fr, which is minmax(0,1fr) — that zero minimum lets a row
+        shrink below its content and clip.
+      */}
+      <div className="grid auto-rows-[1fr] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((item) => (
-          <div key={item.id}>{item.card}</div>
+          <div key={item.id} className="h-full">
+            {item.card}
+          </div>
         ))}
       </div>
     </>
