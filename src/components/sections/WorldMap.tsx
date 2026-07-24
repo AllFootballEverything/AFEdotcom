@@ -13,6 +13,12 @@ type Shape = {
   d: string;
   region?: "core" | "extended";
   name?: string;
+  /**
+   * A distant territory split off from its country (French Guiana from France).
+   * It keeps the country's fill so the map looks unchanged at rest, but is not
+   * a hover target — otherwise hovering France lights up South America.
+   */
+  inert?: boolean;
 };
 
 /**
@@ -38,7 +44,8 @@ export function WorldMap({
   legend?: React.ReactNode;
 }) {
   const shapes = worldMap.shapes as Shape[];
-  const regionCount = shapes.filter((s) => s.region).length;
+  // Count hoverable countries only — split-off territories are not extra places.
+  const regionCount = shapes.filter((s) => s.region && !s.inert).length;
 
   return (
     <WorldMapInteractions>
@@ -56,13 +63,14 @@ export function WorldMap({
             fill={FILL[shape.region ?? "none"]}
             stroke="#161616"
             strokeWidth={0.7}
-            {...(shape.region && {
-              "data-region": shape.region,
-              "data-name": shape.name,
-              tabIndex: 0,
-              role: "button",
-              "aria-label": `${shape.name} — AFE ${shape.region} region`,
-            })}
+            {...(shape.region &&
+              !shape.inert && {
+                "data-region": shape.region,
+                "data-name": shape.name,
+                tabIndex: 0,
+                role: "button",
+                "aria-label": `${shape.name} — AFE ${shape.region} region`,
+              })}
           />
         ))}
       </svg>
