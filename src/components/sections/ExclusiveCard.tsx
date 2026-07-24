@@ -73,26 +73,33 @@ export function ExclusiveCard({
         <h3 className="font-sans text-base font-bold uppercase leading-tight text-cream">
           {item.title}
         </h3>
-        {item.meta ? (
-          <span className="font-mono text-[11px] font-medium text-white/50">
-            {item.meta}
-          </span>
-        ) : null}
 
-        {!unlocked && lockedCta ? (
-          <Link
-            href={lockedCta.href}
-            className="mt-auto pt-3 font-sans text-xs font-black tracking-[0.06em] text-volt"
-          >
-            {lockedCta.label}
-          </Link>
-        ) : null}
+        {/* Pinned to the bottom by mt-auto so the meta line sits on the same
+            baseline across a row, however many lines the title above runs to. */}
+        <div className="mt-auto flex flex-col gap-2 pt-2">
+          {item.meta ? (
+            <span className="font-mono text-[11px] font-medium text-white/50">
+              {item.meta}
+            </span>
+          ) : null}
+
+          {!unlocked && lockedCta ? (
+            <Link
+              href={lockedCta.href}
+              className="font-sans text-xs font-black tracking-[0.06em] text-volt"
+            >
+              {lockedCta.label}
+            </Link>
+          ) : null}
+        </div>
       </div>
     </>
   );
 
+  // h-full lets the card fill its grid cell, so every card in the library is the
+  // same height regardless of how long its title runs.
   const className =
-    "group flex flex-col border border-white/[0.18] transition-colors hover:border-volt";
+    "group flex h-full flex-col border border-white/[0.18] transition-colors hover:border-volt";
 
   if (!unlocked) {
     return <article className={className}>{body}</article>;
