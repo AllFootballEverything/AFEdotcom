@@ -51,7 +51,7 @@ export function FilterGrid({
                 aria-pressed={isActive}
                 className={`border px-3.5 py-2.5 font-sans text-[11px] font-bold tracking-[0.08em] transition-colors ${
                   isActive
-                    ? "border-volt bg-volt text-[#1a1a1a]"
+                    ? "border-volt bg-volt text-[#201D1F]"
                     : "border-white/25 text-cream/80 hover:border-volt"
                 }`}
               >

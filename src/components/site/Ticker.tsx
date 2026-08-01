@@ -44,7 +44,7 @@ export function Ticker({ label = "THE CLUBHOUSE — LIVE", items, cta }: Props) 
 
   return (
     <div className="flex items-stretch border-y-2 border-volt bg-ink-deep">
-      <div className="hidden flex-none items-center gap-2.5 bg-volt px-5 text-[#1a1a1a] sm:flex">
+      <div className="hidden flex-none items-center gap-2.5 bg-volt px-5 text-[#201D1F] sm:flex">
         <span className="h-2 w-2 rounded-full bg-rust" />
         <span className="font-sans text-xs font-black tracking-[0.1em]">{label}</span>
       </div>

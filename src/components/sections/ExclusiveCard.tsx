@@ -43,14 +43,14 @@ export function ExclusiveCard({
             }`}
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-[repeating-linear-gradient(45deg,#1E1E1E,#1E1E1E_10px,#232323_10px,#232323_20px)]">
+          <div className="absolute inset-0 flex items-center justify-center bg-[repeating-linear-gradient(45deg,#201D1F,#201D1F_10px,#232323_10px,#232323_20px)]">
             <span className="font-mono text-[11px] font-medium tracking-[0.15em] text-white/40">
               [ {MEDIA_LABEL[item.media]} ]
             </span>
           </div>
         )}
 
-        <span className="absolute left-3 top-3 bg-volt px-2 py-1 font-sans text-[10px] font-black tracking-[0.08em] text-[#1a1a1a]">
+        <span className="absolute left-3 top-3 bg-volt px-2 py-1 font-sans text-[10px] font-black tracking-[0.08em] text-[#201D1F]">
           {item.category}
         </span>
         <span className="absolute right-3 top-3 font-mono text-[10px] font-medium text-white/70">
@@ -59,7 +59,7 @@ export function ExclusiveCard({
 
         {!unlocked ? (
           <div className="absolute inset-0 flex items-center justify-center bg-ink/50">
-            <span className="bg-volt px-3 py-2 font-sans text-[11px] font-black tracking-[0.08em] text-[#1a1a1a]">
+            <span className="bg-volt px-3 py-2 font-sans text-[11px] font-black tracking-[0.08em] text-[#201D1F]">
               🔒 {item.visibility === "public" ? "MEMBERS" : item.visibility.toUpperCase()}{" "}
               ONLY
             </span>

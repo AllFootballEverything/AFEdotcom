@@ -66,7 +66,7 @@ export default async function HomePage() {
             <Headline
               as="h1"
               text={page?.heroHeadline ?? DEFAULTS.heroHeadline}
-              className="font-display text-[clamp(40px,5.4vw,96px)] uppercase leading-[0.95] tracking-[-0.01em]"
+              className="font-display text-[clamp(47px,6.4vw,113px)] uppercase leading-[0.95] tracking-[0.01em]"
             />
             <p className="mt-7 max-w-[440px] font-sans text-base leading-[1.6] text-cream/75">
               {page?.heroIntro ?? DEFAULTS.heroIntro}
@@ -83,7 +83,7 @@ export default async function HomePage() {
               >
                 <dt className="sr-only">{stat.label}</dt>
                 <dd className="m-0">
-                  <span className="block font-display text-[clamp(22px,2.4vw,36px)] leading-none text-volt">
+                  <span className="block font-display text-[clamp(26px,2.8vw,42px)] leading-none text-volt">
                     {stat.value}
                   </span>
                   <span className="mt-2 block font-sans text-[10px] font-semibold tracking-[0.12em] text-white/55">
@@ -131,7 +131,7 @@ export default async function HomePage() {
         <MarkerHeadline
           as="h2"
           text={page?.missionHeadline ?? DEFAULTS.missionHeadline}
-          className="m-0 max-w-[1000px] font-display text-[clamp(30px,4vw,46px)] uppercase leading-[1.15]"
+          className="m-0 max-w-[1000px] font-display text-[clamp(35px,4.7vw,54px)] uppercase leading-[1.15]"
         />
         <p className="mt-7 max-w-[560px] font-sans text-[15px] leading-[1.7] text-ink/65">
           {page?.missionBody ?? DEFAULTS.missionBody}
@@ -163,7 +163,7 @@ export default async function HomePage() {
                 <div>
                   <span
                     aria-hidden="true"
-                    className="block font-display text-[40px] leading-none text-volt [-webkit-text-stroke:1.5px_#1E1E1E]"
+                    className="block font-display text-[47px] leading-none text-volt [-webkit-text-stroke:1.5px_#201D1F]"
                   >
                     &quot;
                   </span>
@@ -193,7 +193,7 @@ export default async function HomePage() {
       {sessions.length > 0 ? (
         <section className="bg-ink px-6 py-20 lg:px-12">
           <div className="mb-7 flex flex-wrap items-baseline justify-between gap-4">
-            <h2 className="font-display text-[clamp(24px,3vw,32px)] uppercase">
+            <h2 className="font-display text-[clamp(28px,3.5vw,38px)] uppercase">
               {page?.eventsHeading ?? "Upcoming sessions"}
             </h2>
             <Link
@@ -220,7 +220,7 @@ export default async function HomePage() {
           <Headline
             as="h2"
             text={page?.clubhouseHeadline ?? DEFAULTS.clubhouseHeadline}
-            className="font-display text-[clamp(32px,4.2vw,48px)] uppercase leading-none"
+            className="font-display text-[clamp(38px,5vw,57px)] uppercase leading-none"
           />
           <p className="mt-4.5 max-w-[420px] font-sans text-sm leading-[1.7] text-cream/70">
             {page?.clubhouseBody ?? DEFAULTS.clubhouseBody}
@@ -266,7 +266,7 @@ export default async function HomePage() {
               <Headline
                 as="h2"
                 text={page?.mapHeadline ?? DEFAULTS.mapHeadline}
-                className="font-display text-[22px] uppercase"
+                className="font-display text-[26px] uppercase"
               />
             }
             legend={
@@ -298,7 +298,7 @@ export default async function HomePage() {
       {partners.length > 0 ? (
         <section className="bg-bone px-6 py-20 text-ink lg:px-12">
           <div className="mb-8 flex flex-wrap items-baseline justify-between gap-4">
-            <h2 className="font-display text-[clamp(24px,3vw,32px)] uppercase">
+            <h2 className="font-display text-[clamp(28px,3.5vw,38px)] uppercase">
               {page?.partnersHeading ?? "The brands we play with"}
             </h2>
             <span className="afe-kicker">{page?.partnersKicker ?? "OUR NETWORK"}</span>

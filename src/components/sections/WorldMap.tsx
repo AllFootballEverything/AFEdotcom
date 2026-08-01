@@ -3,8 +3,8 @@ import worldMap from "@/data/world-map.json";
 import { WorldMapInteractions } from "./WorldMapInteractions";
 
 const FILL = {
-  core: "#CAE74D",
-  extended: "#C35934",
+  core: "#C2E812",
+  extended: "#D05126",
   none: "#5d5d5d",
 } as const;
 
@@ -61,7 +61,7 @@ export function WorldMap({
             key={shape.id}
             d={shape.d}
             fill={FILL[shape.region ?? "none"]}
-            stroke="#161616"
+            stroke="#171518"
             strokeWidth={0.7}
             {...(shape.region &&
               !shape.inert && {

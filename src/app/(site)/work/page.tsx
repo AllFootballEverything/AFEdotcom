@@ -81,7 +81,7 @@ export default async function WorkPage() {
             as="h2"
             text={page?.contactHeading ?? DEFAULTS.contactHeading}
             accent="rust"
-            className="font-display text-[clamp(30px,4.4vw,48px)] uppercase leading-[1.05]"
+            className="font-display text-[clamp(35px,5.2vw,57px)] uppercase leading-[1.05]"
           />
           <p className="mt-5 max-w-[440px] font-sans text-sm leading-[1.7] text-ink/65">
             {page?.contactBody ?? DEFAULTS.contactBody}
@@ -92,7 +92,7 @@ export default async function WorkPage() {
           <span className="afe-meta text-ink/50">DIRECT LINE</span>
           <a
             href={`mailto:${email}`}
-            className="font-display text-[clamp(18px,2.4vw,26px)] break-all text-ink transition-colors hover:text-rust"
+            className="font-display text-[clamp(21px,2.8vw,31px)] break-all text-ink transition-colors hover:text-rust"
           >
             {email}
           </a>

@@ -16,8 +16,8 @@ const REGION_LABEL = {
 } as const;
 
 const REGION_COLOR = {
-  core: "#CAE74D",
-  extended: "#C35934",
+  core: "#C2E812",
+  extended: "#D05126",
 } as const;
 
 /**

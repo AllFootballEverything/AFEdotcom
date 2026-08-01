@@ -69,7 +69,7 @@ export function ProductCard({
           />
         ) : null}
         {product.badge ? (
-          <span className="absolute left-3 top-3 bg-volt px-2 py-1 font-sans text-[10px] font-black tracking-[0.08em] text-[#1a1a1a]">
+          <span className="absolute left-3 top-3 bg-volt px-2 py-1 font-sans text-[10px] font-black tracking-[0.08em] text-[#201D1F]">
             {product.badge}
           </span>
         ) : null}
@@ -96,7 +96,7 @@ export function ProductCard({
               <span className="font-mono text-xs text-ink/40 line-through">
                 {formatPrice(product.priceCents, product.currency)}
               </span>
-              <span className="bg-volt px-1.5 py-0.5 font-sans text-[9px] font-black tracking-[0.08em] text-[#1a1a1a]">
+              <span className="bg-volt px-1.5 py-0.5 font-sans text-[9px] font-black tracking-[0.08em] text-[#201D1F]">
                 MEMBER
               </span>
             </>

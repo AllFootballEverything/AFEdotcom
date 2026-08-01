@@ -84,7 +84,7 @@ export default async function AboutPage() {
             >
               <dt className="sr-only">{stat.label}</dt>
               <dd className="m-0">
-                <span className="block font-display text-[clamp(28px,3vw,40px)] leading-none text-volt">
+                <span className="block font-display text-[clamp(33px,3.5vw,47px)] leading-none text-volt">
                   {stat.value}
                 </span>
                 <span className="mt-2 block font-sans text-[10px] font-semibold tracking-[0.12em] text-white/55">
@@ -115,7 +115,7 @@ export default async function AboutPage() {
                     </p>
                   ),
                   h2: ({ children }) => (
-                    <h2 className="mb-5 mt-10 font-display text-[clamp(22px,3vw,32px)] uppercase first:mt-0">
+                    <h2 className="mb-5 mt-10 font-display text-[clamp(26px,3.5vw,38px)] uppercase first:mt-0">
                       {children}
                     </h2>
                   ),
@@ -131,7 +131,7 @@ export default async function AboutPage() {
       {/* ------------------------------------------------ testimonials */}
       {testimonials.length > 0 ? (
         <section className="bg-bone px-6 py-20 text-ink lg:px-12">
-          <h2 className="mb-8 font-display text-[clamp(24px,3vw,32px)] uppercase">
+          <h2 className="mb-8 font-display text-[clamp(28px,3.5vw,38px)] uppercase">
             What players say
           </h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -143,7 +143,7 @@ export default async function AboutPage() {
                 <div>
                   <span
                     aria-hidden="true"
-                    className="block font-display text-[40px] leading-none text-volt [-webkit-text-stroke:1.5px_#1E1E1E]"
+                    className="block font-display text-[47px] leading-none text-volt [-webkit-text-stroke:1.5px_#201D1F]"
                   >
                     &quot;
                   </span>

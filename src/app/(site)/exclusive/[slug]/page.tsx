@@ -54,7 +54,7 @@ export default async function ExclusiveDetailPage({ params }: Params) {
           ← BACK TO THE LIBRARY
         </Link>
         <p className="afe-kicker mt-6 mb-4">{item.category}</p>
-        <h1 className="font-display text-[clamp(30px,5vw,64px)] uppercase leading-[1.02]">
+        <h1 className="font-display text-[clamp(35px,5.9vw,76px)] uppercase leading-[1.02]">
           {item.title}
         </h1>
         <p className="mt-5 flex flex-wrap gap-4 font-mono text-[11px] font-medium tracking-[0.08em] text-white/50">
@@ -102,7 +102,7 @@ export default async function ExclusiveDetailPage({ params }: Params) {
                       </p>
                     ),
                     h2: ({ children }) => (
-                      <h2 className="mb-4 mt-10 font-display text-[clamp(20px,2.6vw,28px)] uppercase first:mt-0">
+                      <h2 className="mb-4 mt-10 font-display text-[clamp(24px,3.1vw,33px)] uppercase first:mt-0">
                         {children}
                       </h2>
                     ),
@@ -116,7 +116,7 @@ export default async function ExclusiveDetailPage({ params }: Params) {
         /* Locked: nothing from the body or the video URL is rendered at all. */
         <div className="px-6 py-16 lg:px-12">
           <div className="flex max-w-[560px] flex-col items-start gap-5 border-2 border-volt p-10">
-            <span className="font-display text-[clamp(22px,3vw,32px)] uppercase text-volt">
+            <span className="font-display text-[clamp(26px,3.5vw,38px)] uppercase text-volt">
               🔒 Members only
             </span>
             <p className="m-0 font-sans text-sm leading-[1.7] text-cream/80">

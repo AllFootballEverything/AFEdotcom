@@ -20,8 +20,8 @@ export default function StudioPage() {
           alignItems: "center",
           justifyContent: "center",
           padding: 32,
-          background: "#1E1E1E",
-          color: "#EFEDE8",
+          background: "#201D1F",
+          color: "#F2F2F2",
           fontFamily: "system-ui, sans-serif",
         }}
       >

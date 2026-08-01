@@ -74,7 +74,7 @@ export default async function TrainingPage() {
       {/* ------------------------------------------------ schedule */}
       {sessions.length > 0 ? (
         <section className="bg-bone px-6 py-18 text-ink lg:px-12">
-          <h2 className="mb-7 font-display text-[clamp(24px,3vw,32px)] uppercase">
+          <h2 className="mb-7 font-display text-[clamp(28px,3.5vw,38px)] uppercase">
             {page?.calendarHeading ?? "Upcoming sessions"}
           </h2>
 
@@ -142,7 +142,7 @@ export default async function TrainingPage() {
       >
         <div>
           <p className="afe-kicker mb-4.5">BOOK YOUR SESSION</p>
-          <h2 className="font-display text-[clamp(30px,4.2vw,48px)] uppercase leading-[1.05]">
+          <h2 className="font-display text-[clamp(35px,5vw,57px)] uppercase leading-[1.05]">
             {(page?.bookingHeading ?? DEFAULTS.bookingHeading)
               .split("|")
               .map((line, index) => (
