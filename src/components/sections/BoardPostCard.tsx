@@ -26,7 +26,7 @@ const THEME = {
     card: "border-white/[0.16] bg-ink-panel text-cream",
     body: "text-cream/85",
     handle: "text-white/45",
-    badge: "bg-volt text-[#1a1a1a]",
+    badge: "bg-volt text-[#201D1F]",
     footer: "text-white/45 border-white/10",
   },
   light: {
@@ -112,7 +112,7 @@ export function BoardPostCard({
         </div>
         <span
           className={`ml-auto px-2.5 py-1.5 font-sans text-[10px] font-black tracking-[0.08em] ${
-            variant === "teaser" ? "bg-volt text-[#1a1a1a]" : styles.badge
+            variant === "teaser" ? "bg-volt text-[#201D1F]" : styles.badge
           }`}
         >
           {post.visibility === "public" ? "ALL MEMBERS" : post.visibility.toUpperCase()}
@@ -134,7 +134,7 @@ export function BoardPostCard({
             {REDACTED}
           </p>
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="bg-volt px-3 py-2 text-center font-sans text-[11px] font-black tracking-[0.08em] text-[#1a1a1a]">
+            <span className="bg-volt px-3 py-2 text-center font-sans text-[11px] font-black tracking-[0.08em] text-[#201D1F]">
               {lockedMessage}
             </span>
           </div>

@@ -60,7 +60,7 @@ export function BookingForm({
   if (submitted) {
     return (
       <div className="flex flex-col justify-center gap-4 border-2 border-volt p-10">
-        <span className="font-display text-[clamp(26px,4vw,36px)] uppercase text-volt">
+        <span className="font-display text-[clamp(31px,4.7vw,42px)] uppercase text-volt">
           You&apos;re in, {firstName}.
         </span>
         <p className="m-0 font-sans text-sm leading-[1.7] text-cream/80">{confirmation}</p>
@@ -132,7 +132,7 @@ export function BookingForm({
               aria-pressed={active}
               className={`border px-4 py-2.5 font-sans text-xs font-bold tracking-[0.06em] transition-colors ${
                 active
-                  ? "border-volt bg-volt text-[#1a1a1a]"
+                  ? "border-volt bg-volt text-[#201D1F]"
                   : "border-white/25 text-cream/80 hover:border-volt"
               }`}
             >
@@ -151,7 +151,7 @@ export function BookingForm({
       <button
         type="submit"
         disabled={pending}
-        className="mt-1.5 bg-volt px-6 py-4.5 text-center font-sans text-[13px] font-black tracking-[0.08em] text-[#1a1a1a] transition-colors hover:bg-rust hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-1.5 bg-volt px-6 py-4.5 text-center font-sans text-[13px] font-black tracking-[0.08em] text-[#201D1F] transition-colors hover:bg-rust hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
       >
         {pending ? "SENDING…" : "REQUEST A SPOT →"}
       </button>

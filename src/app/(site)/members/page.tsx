@@ -68,7 +68,7 @@ export default async function MembersPage({
           <Headline
             as="h1"
             text={page?.headline ?? DEFAULTS.headline}
-            className="font-display text-[clamp(40px,7vw,84px)] uppercase leading-[0.98] tracking-[-0.01em]"
+            className="font-display text-[clamp(47px,8.3vw,99px)] uppercase leading-[0.98] tracking-[0.01em]"
           />
           <p className="mt-7 max-w-[560px] font-sans text-base leading-[1.6] text-cream/75">
             {page?.intro ?? DEFAULTS.intro}
@@ -106,7 +106,7 @@ export default async function MembersPage({
                 <MarkerHeadline
                   as="h2"
                   text={DEFAULTS.boardHeadline}
-                  className="m-0 font-display text-[clamp(28px,3.6vw,38px)] uppercase leading-[1.12]"
+                  className="m-0 font-display text-[clamp(33px,4.2vw,45px)] uppercase leading-[1.12]"
                 />
                 <p className="mt-5 font-sans text-sm leading-[1.7] text-ink/65">
                   {page?.boardIntro ?? DEFAULTS.boardIntro}
@@ -122,7 +122,7 @@ export default async function MembersPage({
         <Headline
           as="h2"
           text="Not sure which tier? *Start with Scout.*"
-          className="font-display text-[clamp(28px,4vw,44px)] uppercase leading-[1.05]"
+          className="font-display text-[clamp(33px,4.7vw,52px)] uppercase leading-[1.05]"
         />
         <ButtonLink
           href={

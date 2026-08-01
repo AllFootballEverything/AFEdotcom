@@ -39,7 +39,7 @@ export default async function ShopPage({
   return (
     <div className="animate-[afe-fadeup_0.45s_ease_both]">
       {params.checkout === "success" ? (
-        <div className="bg-volt px-6 py-4 font-sans text-sm font-bold text-[#1a1a1a] lg:px-12">
+        <div className="bg-volt px-6 py-4 font-sans text-sm font-bold text-[#201D1F] lg:px-12">
           Order confirmed — check your inbox for the receipt. &apos;Til the wheels fall
           off.
         </div>

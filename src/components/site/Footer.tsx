@@ -12,9 +12,9 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
 
   return (
     <footer>
-      <div className="flex flex-col items-start justify-between gap-8 bg-volt px-6 py-12 text-[#1a1a1a] lg:flex-row lg:items-center lg:px-12 lg:py-15">
+      <div className="flex flex-col items-start justify-between gap-8 bg-volt px-6 py-12 text-[#201D1F] lg:flex-row lg:items-center lg:px-12 lg:py-15">
         <div>
-          <div className="font-display text-[clamp(38px,6vw,64px)] uppercase leading-none">
+          <div className="font-display text-[clamp(45px,7.1vw,76px)] uppercase leading-none">
             {headline}
           </div>
           <div className="mt-4 font-mono text-xs font-medium tracking-[0.1em] opacity-75">

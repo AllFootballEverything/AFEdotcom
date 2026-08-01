@@ -9,7 +9,7 @@ export type ButtonVariant = "volt" | "outline" | "dark";
 
 const VARIANTS: Record<ButtonVariant, string> = {
   // Primary CTA: volt block, inverts to rust on hover.
-  volt: "bg-volt text-[#1a1a1a] hover:bg-rust hover:text-white",
+  volt: "bg-volt text-[#201D1F] hover:bg-rust hover:text-white",
   // Secondary: hairline border on dark, picks up volt on hover.
   outline:
     "border border-white/30 text-cream hover:border-volt hover:text-volt",

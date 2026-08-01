@@ -1,21 +1,25 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   AFE design tokens — lifted from the Claude Design source
-   (afe-1b-page-*-src.dc.html). Do not invent new brand colours; use these.
+   AFE design tokens — Official Brand ID 2025 (AFE_BRAND_ID.pdf).
+   Do not invent new brand colours; use these. Every component reads these
+   variables, so the brand refresh is applied here and propagates everywhere.
 --------------------------------------------------------------------------- */
 @theme {
-  --color-ink: #1e1e1e; /* primary dark surface / body background */
+  --color-ink: #201d1f; /* primary dark surface / body background */
   --color-ink-panel: #232323; /* raised card on dark */
-  --color-ink-deep: #161616; /* recessed band (ticker, map frame) */
-  --color-cream: #efede8; /* body text on dark */
+  --color-ink-deep: #171518; /* recessed band (ticker, map frame) */
+  --color-cream: #f2f2f2; /* off-white body text on dark */
   --color-bone: #f0eee9; /* light editorial band background */
-  --color-volt: #cae74d; /* primary accent / CTA */
-  --color-rust: #c35934; /* secondary accent / hover */
+  --color-volt: #c2e812; /* primary accent / CTA */
+  --color-rust: #d05126; /* secondary accent / hover */
+  --color-pink: #fa61e8; /* brand pink — available, currently unused */
 
-  --font-sans: var(--font-archivo), system-ui, sans-serif;
-  --font-display: var(--font-archivo-black), var(--font-archivo), sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  /* SCHABO Condensed — display; PP Neue Montreal — everything else, including
+     the old "mono" role (letter-spacing kept on those labels via utilities). */
+  --font-sans: var(--font-neue-montreal), system-ui, sans-serif;
+  --font-display: var(--font-schabo), var(--font-neue-montreal), sans-serif;
+  --font-mono: var(--font-neue-montreal), ui-monospace, monospace;
 
   --animate-fadeup: afe-fadeup 0.45s ease both;
   --animate-ticker: afe-ticker 30s linear infinite;

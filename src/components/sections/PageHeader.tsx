@@ -21,7 +21,7 @@ export function PageHeader({
       <Headline
         as="h1"
         text={headline}
-        className="font-display text-[clamp(40px,7vw,84px)] uppercase leading-[0.98] tracking-[-0.01em]"
+        className="font-display text-[clamp(47px,8.3vw,99px)] uppercase leading-[0.98] tracking-[0.01em]"
       />
       {intro ? (
         <p className="mt-7 max-w-[560px] font-sans text-base leading-[1.6] text-cream/75">
@@ -60,7 +60,7 @@ export function NumberedGrid({
           <span className="font-sans text-[11px] font-bold tracking-[0.12em] text-rust">
             {block.number}
           </span>
-          <h2 className="font-display text-[clamp(20px,2.5vw,26px)] uppercase">
+          <h2 className="font-display text-[clamp(24px,2.9vw,31px)] uppercase">
             {block.title}
           </h2>
 

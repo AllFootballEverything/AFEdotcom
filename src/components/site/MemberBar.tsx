@@ -24,7 +24,7 @@ export function MemberBar({ viewer, error }: { viewer: Viewer; error?: string })
           ) : null}
           <a
             href="/api/auth/whop/login?returnTo=/members"
-            className="bg-volt px-5 py-3 font-sans text-xs font-black tracking-[0.08em] text-[#1a1a1a] transition-colors hover:bg-rust hover:text-white"
+            className="bg-volt px-5 py-3 font-sans text-xs font-black tracking-[0.08em] text-[#201D1F] transition-colors hover:bg-rust hover:text-white"
           >
             SIGN IN WITH WHOP →
           </a>

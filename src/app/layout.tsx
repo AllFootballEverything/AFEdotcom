@@ -1,26 +1,34 @@
 import type { Metadata } from "next";
-import { Archivo, Archivo_Black, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const archivo = Archivo({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "900"],
-  variable: "--font-archivo",
-  display: "swap",
-});
-
-const archivoBlack = Archivo_Black({
-  subsets: ["latin"],
+/**
+ * Official AFE Brand ID 2025 typefaces.
+ *
+ * SCHABO Condensed — all headlines/display, single weight, always uppercase.
+ * PP Neue Montreal — everything else (body, UI labels, and the old mono role).
+ * Both are self-hosted .otf files under src/fonts. Bolder Neue Montreal weights
+ * (the 700/900 button styles) synthesize from Book until the client supplies
+ * more — accepted in the handoff.
+ */
+const schabo = localFont({
+  src: "../fonts/SCHABO-Condensed.otf",
   weight: "400",
-  variable: "--font-archivo-black",
   display: "swap",
+  variable: "--font-schabo",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-jetbrains-mono",
+const neueMontreal = localFont({
+  src: [
+    { path: "../fonts/PPNeueMontreal-Book.otf", weight: "400", style: "normal" },
+    {
+      path: "../fonts/PPNeueMontreal-SemiBolditalic.otf",
+      weight: "600",
+      style: "italic",
+    },
+  ],
   display: "swap",
+  variable: "--font-neue-montreal",
 });
 
 export const metadata: Metadata = {
@@ -47,10 +55,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${archivo.variable} ${archivoBlack.variable} ${jetbrainsMono.variable}`}
-    >
+    <html lang="en" className={`${schabo.variable} ${neueMontreal.variable}`}>
       <body>{children}</body>
     </html>
   );

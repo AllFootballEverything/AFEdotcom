@@ -85,7 +85,7 @@ export function TierCard({
           />
         ) : null}
         {tier.badge ? (
-          <span className="absolute left-3.5 top-3.5 bg-volt px-2.5 py-1.5 font-sans text-[10px] font-black tracking-[0.08em] text-[#1a1a1a]">
+          <span className="absolute left-3.5 top-3.5 bg-volt px-2.5 py-1.5 font-sans text-[10px] font-black tracking-[0.08em] text-[#201D1F]">
             {tier.badge}
           </span>
         ) : null}
@@ -127,7 +127,7 @@ export function TierCard({
               : {})}
             className={`block p-4 text-center font-sans text-xs font-black tracking-[0.08em] transition-colors hover:border-rust hover:bg-rust hover:text-white ${
               tier.highlighted
-                ? "border border-volt bg-volt text-[#1a1a1a]"
+                ? "border border-volt bg-volt text-[#201D1F]"
                 : "border border-white/30 bg-transparent text-cream"
             }`}
           >

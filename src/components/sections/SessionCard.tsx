@@ -35,7 +35,7 @@ export function SessionCard({
 
   const inner = (
     <>
-      <span className="font-display text-[22px] leading-none text-volt">
+      <span className="font-display text-[26px] leading-none text-volt">
         {formatEventDate(session.startsAt)}
       </span>
       {/* Explicit text-cream: the card is an <a>, and the global a{color:volt}
@@ -57,7 +57,7 @@ export function SessionCard({
             {statusText}
           </span>
           {session.priorityTier ? (
-            <span className="bg-volt px-2 py-1 font-sans text-[9px] font-black tracking-[0.08em] text-[#1a1a1a]">
+            <span className="bg-volt px-2 py-1 font-sans text-[9px] font-black tracking-[0.08em] text-[#201D1F]">
               {TIER_BADGE[session.priorityTier]} PRIORITY
             </span>
           ) : null}

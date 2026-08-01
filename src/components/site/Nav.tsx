@@ -146,7 +146,7 @@ export function Nav({
               {bookVisible ? (
                 <Link
                   href={cta.href}
-                  className="bg-volt px-5 py-3 font-sans text-xs font-black uppercase tracking-[0.08em] text-[#1a1a1a] transition-colors hover:bg-rust hover:text-white"
+                  className="bg-volt px-5 py-3 font-sans text-xs font-black uppercase tracking-[0.08em] text-[#201D1F] transition-colors hover:bg-rust hover:text-white"
                 >
                   {cta.label}
                 </Link>
@@ -218,7 +218,7 @@ export function Nav({
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className={`py-4 font-display text-[clamp(28px,7vw,40px)] uppercase leading-none transition-colors ${
+              className={`py-4 font-display text-[clamp(33px,8.3vw,47px)] uppercase leading-none transition-colors ${
                 isActive(item.href) ? "text-volt" : "text-cream hover:text-volt"
               }`}
             >
@@ -264,7 +264,7 @@ export function Nav({
               <Link
                 href={cta.href}
                 onClick={() => setOpen(false)}
-                className="bg-volt px-5 py-4 text-center font-sans text-sm font-black uppercase tracking-[0.08em] text-[#1a1a1a]"
+                className="bg-volt px-5 py-4 text-center font-sans text-sm font-black uppercase tracking-[0.08em] text-[#201D1F]"
               >
                 {cta.label}
               </Link>
