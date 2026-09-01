@@ -436,6 +436,8 @@ function ResultsScreen({
         </div>
       )}
 
+      <ShareRow archetype={archetype} />
+
       <button
         type="button"
         onClick={onRetake}
@@ -443,6 +445,83 @@ function ResultsScreen({
       >
         ← retake the assessment
       </button>
+    </div>
+  );
+}
+
+/**
+ * Share the archetype result.
+ *
+ * On devices with the Web Share API (mostly mobile) the primary button opens
+ * the native share sheet; elsewhere it copies the link and confirms. X and
+ * WhatsApp are always offered as explicit fallbacks so desktop has a path too.
+ *
+ * The URL is read from window.location.origin at click time rather than an env
+ * var, so a shared link always points at wherever the site is actually served.
+ */
+function ShareRow({ archetype }: { archetype: { name: string; tagline: string } }) {
+  const [copied, setCopied] = useState(false);
+  const [canWebShare, setCanWebShare] = useState(false);
+
+  // navigator.share is read after mount so the button label is stable between
+  // server and client render (no hydration mismatch).
+  useEffect(() => {
+    setCanWebShare(
+      typeof navigator !== "undefined" && typeof navigator.share === "function",
+    );
+  }, []);
+
+  const shareText = `I'm ${archetype.name} — ${archetype.tagline} Are you ready to play abroad? Take AFE's self-assessment:`;
+  const shareUrl =
+    typeof window !== "undefined"
+      ? window.location.origin
+      : "https://allfootballeverything.com";
+
+  async function primary() {
+    if (canWebShare) {
+      try {
+        await navigator.share({
+          title: "AFE — Are you ready to play abroad?",
+          text: shareText,
+          url: shareUrl,
+        });
+      } catch {
+        // User dismissed the share sheet, or it failed — nothing to do.
+      }
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
+    }
+  }
+
+  const encoded = encodeURIComponent(`${shareText} ${shareUrl}`);
+  const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+  const waHref = `https://wa.me/?text=${encoded}`;
+
+  const buttonClass =
+    "flex items-center justify-center gap-2 border border-white/[0.18] px-4 py-3 font-sans text-xs font-bold uppercase tracking-[0.08em] text-cream transition-colors hover:border-volt hover:text-volt";
+
+  return (
+    <div className="mt-8">
+      <p className="mb-3 font-sans text-[11px] font-bold uppercase tracking-[0.15em] text-rust">
+        // SHARE YOUR RESULT
+      </p>
+      <button type="button" onClick={primary} className={`w-full ${buttonClass}`}>
+        {canWebShare ? "SHARE MY RESULT" : copied ? "COPIED ✓" : "COPY LINK"}
+      </button>
+      <div className="mt-2.5 grid grid-cols-2 gap-2.5">
+        <a href={xHref} target="_blank" rel="noopener noreferrer" className={buttonClass}>
+          X / TWITTER
+        </a>
+        <a href={waHref} target="_blank" rel="noopener noreferrer" className={buttonClass}>
+          WHATSAPP
+        </a>
+      </div>
     </div>
   );
 }
