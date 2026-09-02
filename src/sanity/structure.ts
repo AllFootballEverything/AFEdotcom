@@ -55,6 +55,7 @@ export const structure: StructureResolver = (S) =>
             .title("Records")
             .items([
               S.documentTypeListItem("bookingEnquiry").title("Booking enquiries"),
+              S.documentTypeListItem("assessmentLead").title("Assessment leads"),
               S.documentTypeListItem("member").title("Members (Whop sync)"),
             ]),
         ),

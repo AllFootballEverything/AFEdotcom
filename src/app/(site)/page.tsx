@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { SelfAssessment } from "@/components/assessment/SelfAssessment";
 import { BoardPostCard } from "@/components/sections/BoardPostCard";
 import { SessionCard } from "@/components/sections/SessionCard";
 import { WorldMap } from "@/components/sections/WorldMap";
@@ -188,6 +189,9 @@ export default async function HomePage() {
           </div>
         </section>
       ) : null}
+
+      {/* ------------------------------------------------ self-assessment CTA */}
+      <SelfAssessment />
 
       {/* ------------------------------------------------ upcoming sessions */}
       {sessions.length > 0 ? (

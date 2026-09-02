@@ -689,6 +689,85 @@ export const memberType = defineType({
   },
 });
 
+export const assessmentLeadType = defineType({
+  name: "assessmentLead",
+  title: "Assessment lead",
+  type: "document",
+  description:
+    'Captured by the "Are you ready to play abroad?" quiz. Read-only in practice — the site writes these.',
+  fields: [
+    defineField({ name: "email", title: "Email", type: "string", readOnly: true }),
+    defineField({
+      name: "archetype",
+      title: "Archetype",
+      type: "string",
+      readOnly: true,
+      options: {
+        list: [
+          { title: "The Competitor", value: "competitive" },
+          { title: "The Self-Starter", value: "independence" },
+          { title: "The Steady One", value: "resilience" },
+          { title: "The Adapter", value: "adaptability" },
+        ],
+      },
+    }),
+    defineField({
+      name: "scores",
+      title: "Category scores (%)",
+      type: "array",
+      readOnly: true,
+      of: [
+        defineField({
+          name: "score",
+          type: "object",
+          fields: [
+            defineField({ name: "key", type: "string" }),
+            defineField({ name: "pct", type: "number" }),
+          ],
+          preview: {
+            select: { title: "key", subtitle: "pct" },
+            prepare: ({ title, subtitle }) => ({
+              title: String(title ?? ""),
+              subtitle: `${subtitle ?? 0}%`,
+            }),
+          },
+        }),
+      ],
+    }),
+    defineField({
+      name: "answers",
+      title: "Answers (1–5)",
+      type: "array",
+      readOnly: true,
+      of: [{ type: "number" }],
+    }),
+    defineField({ name: "submittedAt", title: "Submitted at", type: "datetime", readOnly: true }),
+    defineField({
+      name: "toolkitSent",
+      title: "Toolkit sent",
+      type: "boolean",
+      description: "Tick once the Playing Abroad Toolkit has gone out.",
+      initialValue: false,
+    }),
+  ],
+  orderings: [
+    {
+      title: "Newest first",
+      name: "submittedAtDesc",
+      by: [{ field: "submittedAt", direction: "desc" }],
+    },
+  ],
+  preview: {
+    select: { title: "email", archetype: "archetype", date: "submittedAt" },
+    prepare: ({ title, archetype, date }) => ({
+      title: title ?? "Unknown lead",
+      subtitle: `${String(archetype ?? "—").toUpperCase()} — ${
+        date ? new Date(date).toDateString() : "no date"
+      }`,
+    }),
+  },
+});
+
 export const collectionTypes = [
   sessionType,
   boardPostType,
@@ -699,4 +778,5 @@ export const collectionTypes = [
   partnerType,
   bookingEnquiryType,
   memberType,
+  assessmentLeadType,
 ];
