@@ -197,6 +197,7 @@ export function SelfAssessment() {
             {screen === "results" ? (
               <ResultsScreen
                 archetype={archetype}
+                archetypeKey={archetypeKey}
                 scores={scores}
                 email={email}
                 onEmail={setEmail}
@@ -321,6 +322,7 @@ function QuizScreen({
 
 function ResultsScreen({
   archetype,
+  archetypeKey,
   scores,
   email,
   onEmail,
@@ -331,6 +333,7 @@ function ResultsScreen({
   onRetake,
 }: {
   archetype: { name: string; tagline: string; copy: string };
+  archetypeKey: string;
   scores: { key: string; label: string; pct: number }[];
   email: string;
   onEmail: (value: string) => void;
@@ -436,7 +439,7 @@ function ResultsScreen({
         </div>
       )}
 
-      <ShareRow archetype={archetype} />
+      <ShareRow archetype={archetype} archetypeKey={archetypeKey} scores={scores} />
 
       <button
         type="button"
@@ -459,15 +462,27 @@ function ResultsScreen({
  * The URL is read from window.location.origin at click time rather than an env
  * var, so a shared link always points at wherever the site is actually served.
  */
-function ShareRow({ archetype }: { archetype: { name: string; tagline: string } }) {
+function ShareRow({
+  archetype,
+  archetypeKey,
+  scores,
+}: {
+  archetype: { name: string; tagline: string };
+  archetypeKey: string;
+  scores: { key: string; pct: number }[];
+}) {
   const [copied, setCopied] = useState(false);
-  const [canWebShare, setCanWebShare] = useState(false);
+  const [status, setStatus] = useState("");
+  const [working, setWorking] = useState(false);
+  // Whether the browser can share an actual image file. Read after mount so
+  // the button label is stable between server and client render.
+  const [canShareFiles, setCanShareFiles] = useState(false);
 
-  // navigator.share is read after mount so the button label is stable between
-  // server and client render (no hydration mismatch).
   useEffect(() => {
-    setCanWebShare(
-      typeof navigator !== "undefined" && typeof navigator.share === "function",
+    setCanShareFiles(
+      typeof navigator !== "undefined" &&
+        typeof navigator.canShare === "function" &&
+        typeof navigator.share === "function",
     );
   }, []);
 
@@ -477,19 +492,56 @@ function ShareRow({ archetype }: { archetype: { name: string; tagline: string } 
       ? window.location.origin
       : "https://allfootballeverything.com";
 
-  async function primary() {
-    if (canWebShare) {
-      try {
-        await navigator.share({
-          title: "AFE — Are you ready to play abroad?",
-          text: shareText,
-          url: shareUrl,
-        });
-      } catch {
-        // User dismissed the share sheet, or it failed — nothing to do.
+  /** URL of the generated Instagram Story card for this exact result. */
+  function cardUrl(): string {
+    const params = new URLSearchParams({ archetype: archetypeKey });
+    for (const s of scores) params.set(s.key, String(s.pct));
+    return `/api/assessment/card?${params.toString()}`;
+  }
+
+  /**
+   * The Instagram path. Instagram has no web share intent and won't take a URL,
+   * so we hand it an image: fetch the generated card, then on mobile open the
+   * native share sheet with the file (Instagram appears as a target → Story),
+   * and everywhere else download the PNG to post manually.
+   */
+  async function shareCard() {
+    if (working) return;
+    setWorking(true);
+    setStatus("");
+    try {
+      const res = await fetch(cardUrl());
+      if (!res.ok) throw new Error("card generation failed");
+      const blob = await res.blob();
+      const file = new File([blob], "afe-result.png", { type: "image/png" });
+
+      if (canShareFiles && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file], text: `${shareText} ${shareUrl}` });
+        } catch {
+          // Share sheet dismissed — not an error.
+        }
+        return;
       }
-      return;
+
+      // Desktop / no file share: download so it can be posted from a phone.
+      const objectUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = objectUrl;
+      a.download = "afe-result.png";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(objectUrl);
+      setStatus("Card saved — post it to your story.");
+    } catch {
+      setStatus("Couldn't generate the card — try again.");
+    } finally {
+      setWorking(false);
     }
+  }
+
+  async function copyLink() {
     try {
       await navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
       setCopied(true);
@@ -499,28 +551,48 @@ function ShareRow({ archetype }: { archetype: { name: string; tagline: string } 
     }
   }
 
-  const encoded = encodeURIComponent(`${shareText} ${shareUrl}`);
   const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
-  const waHref = `https://wa.me/?text=${encoded}`;
+  const waHref = `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`;
 
   const buttonClass =
-    "flex items-center justify-center gap-2 border border-white/[0.18] px-4 py-3 font-sans text-xs font-bold uppercase tracking-[0.08em] text-cream transition-colors hover:border-volt hover:text-volt";
+    "flex items-center justify-center gap-2 border border-white/[0.18] px-4 py-3 font-sans text-xs font-bold uppercase tracking-[0.08em] text-cream transition-colors hover:border-volt hover:text-volt disabled:opacity-50";
 
   return (
     <div className="mt-8">
       <p className="mb-3 font-sans text-[11px] font-bold uppercase tracking-[0.15em] text-rust">
         // SHARE YOUR RESULT
       </p>
-      <button type="button" onClick={primary} className={`w-full ${buttonClass}`}>
-        {canWebShare ? "SHARE MY RESULT" : copied ? "COPIED ✓" : "COPY LINK"}
+
+      {/* Primary: the shareable image card (the Instagram path). */}
+      <button
+        type="button"
+        onClick={shareCard}
+        disabled={working}
+        className={`w-full bg-volt !text-ink hover:bg-rust hover:!text-white ${buttonClass} border-volt`}
+      >
+        {working
+          ? "PREPARING…"
+          : canShareFiles
+            ? "SHARE MY RESULT CARD"
+            : "SAVE CARD FOR INSTAGRAM"}
       </button>
-      <div className="mt-2.5 grid grid-cols-2 gap-2.5">
+      {status ? (
+        <p role="status" className="mt-2 font-sans text-[11px] text-cream/60">
+          {status}
+        </p>
+      ) : null}
+
+      {/* Secondary: link-based shares. */}
+      <div className="mt-2.5 grid grid-cols-3 gap-2.5">
         <a href={xHref} target="_blank" rel="noopener noreferrer" className={buttonClass}>
-          X / TWITTER
+          X
         </a>
         <a href={waHref} target="_blank" rel="noopener noreferrer" className={buttonClass}>
           WHATSAPP
         </a>
+        <button type="button" onClick={copyLink} className={buttonClass}>
+          {copied ? "COPIED ✓" : "COPY LINK"}
+        </button>
       </div>
     </div>
   );

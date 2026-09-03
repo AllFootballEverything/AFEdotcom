@@ -84,6 +84,15 @@ export const ANSWER_LABELS = [
  * Category → the question indices that feed it. Order matters: ties in the
  * archetype resolve to the first category listed here.
  */
+export function isCategoryKey(value: unknown): value is CategoryKey {
+  return (
+    value === "competitive" ||
+    value === "independence" ||
+    value === "resilience" ||
+    value === "adaptability"
+  );
+}
+
 export const CATEGORIES: {
   key: CategoryKey;
   label: string;
